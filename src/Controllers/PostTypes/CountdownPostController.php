@@ -17,7 +17,9 @@ class CountdownPostController extends PostController
             supports: ['title'],
             public: true,
             rest: false,
-            position: 25
+            position: 25,
         ));
+
+        $this->addToMenu();
     }
 }
