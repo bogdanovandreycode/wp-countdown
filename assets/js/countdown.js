@@ -49,8 +49,10 @@
             seconds: 1,
         };
 
-        units.forEach(function (unit) {
-            if (secondsIn[unit] !== undefined) {
+        // Ensure units are processed from largest to smallest
+        var orderedUnits = ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'];
+        orderedUnits.forEach(function (unit) {
+            if (units.indexOf(unit) !== -1 && secondsIn[unit] !== undefined) {
                 result[unit] = Math.floor(remaining / secondsIn[unit]);
                 remaining -= result[unit] * secondsIn[unit];
             }
@@ -65,8 +67,7 @@
      * @returns {string}
      */
     function pad(n) {
-        var val = Math.max(0, n) % 100;
-        return String(val).padStart(2, '0');
+        return String(Math.max(0, n)).padStart(2, '0');
     }
 
     /**
