@@ -1,17 +1,19 @@
 <?php
+
 namespace CountdownPlugin;
 
 use WpToolKit\Controller\ViewLoader;
 use WpToolKit\Loader\AttributeLoader;
-use CountdownPlugin\Main;
 
-class Boot {
+class Boot
+{
     public function __construct(
         private string $pluginFilePath,
+        private string $pluginDirPath,
     ) {
-        $this->setUp_wp-countdown();
+        $this->setUpWpCountdown();
 
-        add_action('init', [$this, 'hookInit_wp-countdown']);
+        add_action('init', [$this, 'hookInitWpCountdown']);
 
         add_action('plugins_loaded', function () {
             load_plugin_textdomain(
@@ -20,47 +22,52 @@ class Boot {
                 '/wp-countdown/languages/'
             );
 
-            $this->hookPluginsLoaded_wp-countdown();
+            $this->hookPluginsLoadedWpCountdown();
         });
 
-        register_activation_hook( $pluginFilePath, [$this, 'activate_wp-countdown'] );
-        register_deactivation_hook( $pluginFilePath, [$this, 'deactivate_wp-countdown'] );
+        register_activation_hook($pluginFilePath, [$this, 'activateWpCountdown']);
+        register_deactivation_hook($pluginFilePath, [$this, 'deactivateWpCountdown']);
     }
 
-    public function setUp_wp-countdown(): void 
+    public function setUpWpCountdown(): void
     {
         //TODO CODE
     }
 
-    public function hookInit_wp-countdown(): void 
+    public function hookInitWpCountdown(): void
     {
         //TODO CODE
     }
 
-    public function hookPluginsLoaded_wp-countdown(): void
+    public function hookPluginsLoadedWpCountdown(): void
     {
         $views = new ViewLoader();
-        $views->loadFromYaml($this->pluginFilePath . '/config/views.yml', $this->pluginFilePath);
+
+        $views->loadFromYaml(
+            $this->pluginDirPath . '/configs/views.yml',
+            $this->pluginDirPath
+        );
 
         $loader = new AttributeLoader(
-            'CountdownPlugin\Controller\Route',
-            plugin_dir_path(__FILE__) . 'Controller/Route',
+            'CountdownPlugin\Controllers\Routes',
+            $this->pluginDirPath . '/src/Controllers/Routes',
         );
 
         $loader->loadRoutes();
 
         new Main(
             $this->pluginFilePath,
+            $this->pluginDirPath,
             $views
         );
     }
 
-    public function activate_wp-countdown(): void 
+    public function activateWpCountdown(): void
     {
         //TODO CODE
     }
 
-    public function deactivate_wp-countdown(): void 
+    public function deactivateWpCountdown(): void
     {
         //TODO CODE
     }
