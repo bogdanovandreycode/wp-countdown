@@ -21,7 +21,7 @@ abstract class VcBlockController
                 'base' => $this->shortcodeName,
                 'params' => $this->buildParams(),
                 'name' => ucfirst(str_replace('_', ' ', $this->shortcodeName)),
-                'category' => 'Блоки ТОДН',
+                'category' => 'Доп. блоки',
             ], $this->vcConfig));
         });
     }
