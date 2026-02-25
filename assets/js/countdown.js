@@ -60,12 +60,13 @@
     }
 
     /**
-     * Дополняет число ведущим нулём (возвращает строку длиной >= 2).
+     * Дополняет число ведущим нулём (возвращает строку длиной 2).
      * @param {number} n
      * @returns {string}
      */
     function pad(n) {
-        return String(Math.max(0, n)).padStart(2, '0');
+        var val = Math.max(0, n) % 100;
+        return String(val).padStart(2, '0');
     }
 
     /**

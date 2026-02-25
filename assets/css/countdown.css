@@ -130,7 +130,7 @@
     align-items: center;
     /* push separator up so it aligns with the number cards, not labels */
     padding-bottom: calc(var(--cd-label-size) + 14px);
-    align-self: flex-end;
+    align-self: center;
 }
 
 .cd-separator span {
