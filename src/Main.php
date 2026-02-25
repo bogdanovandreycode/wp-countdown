@@ -2,6 +2,7 @@
 
 namespace CountdownPlugin;
 
+use CountdownPlugin\Controllers\Shortcodes\CountdownVcBlock;
 use WpToolKit\Controller\ViewLoader;
 
 class Main
@@ -11,6 +12,6 @@ class Main
         private string $pluginDirPath,
         private ViewLoader $views,
     ) {
-        //TODO CODE
+        new CountdownVcBlock($this->pluginFilePath, $this->pluginDirPath);
     }
 }

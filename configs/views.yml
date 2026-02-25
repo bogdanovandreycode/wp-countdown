@@ -1,2 +1,3 @@
 # View map for WP ToolKit ViewLoader
 Welcome: /templates/Welcome.php
+CountdownShortcode: /templates/shortcodes/countdown.php

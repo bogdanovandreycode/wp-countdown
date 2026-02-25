@@ -1,0 +1,189 @@
+/*
+ * Countdown Plugin — frontend styles
+ * CSS custom properties are injected as inline style on .cd-countdown-wrap
+ */
+
+/* ── Defaults (overridden via CSS vars from VC settings) ── */
+.cd-countdown-wrap {
+    --cd-number-color: #ffffff;
+    --cd-label-color: #a0a0b0;
+    --cd-block-bg: #1a1a2e;
+    --cd-separator-color: #e94560;
+    --cd-number-size: 48px;
+    --cd-label-size: 13px;
+    --cd-border-radius: 8px;
+    --cd-block-padding: 20px 24px;
+    --cd-gap: 16px;
+
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ── Countdown row ── */
+.cd-countdown {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--cd-gap);
+}
+
+/* ── Individual unit block ── */
+.cd-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* ── Flip container (3-D perspective) ── */
+.cd-flip-container {
+    perspective: 600px;
+}
+
+.cd-flip-card {
+    position: relative;
+    background: var(--cd-block-bg);
+    border-radius: var(--cd-border-radius);
+    padding: var(--cd-block-padding);
+    min-width: 80px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+/* Horizontal split line in the middle of the card */
+.cd-flip-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+}
+
+/* ── Number ── */
+.cd-number {
+    display: block;
+    font-size: var(--cd-number-size);
+    font-weight: 700;
+    color: var(--cd-number-color);
+    line-height: 1;
+    letter-spacing: 2px;
+    transform-origin: center center;
+    backface-visibility: hidden;
+}
+
+/* Flip-out: current number goes away */
+.cd-number.cd-flip-out {
+    animation: cdFlipOut 0.22s ease-in forwards;
+}
+
+/* Flip-in: new number arrives */
+.cd-number.cd-flip-in {
+    animation: cdFlipIn 0.22s ease-out forwards;
+}
+
+@keyframes cdFlipOut {
+    0% {
+        transform: rotateX(0deg) scaleY(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotateX(-90deg) scaleY(0.5);
+        opacity: 0;
+    }
+}
+
+@keyframes cdFlipIn {
+    0% {
+        transform: rotateX(90deg) scaleY(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotateX(0deg) scaleY(1);
+        opacity: 1;
+    }
+}
+
+/* ── Label beneath the card ── */
+.cd-label {
+    font-size: var(--cd-label-size);
+    color: var(--cd-label-color);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ── Separator ":" ── */
+.cd-separator {
+    display: flex;
+    align-items: center;
+    /* push separator up so it aligns with the number cards, not labels */
+    padding-bottom: calc(var(--cd-label-size) + 14px);
+    align-self: flex-end;
+}
+
+.cd-separator span {
+    font-size: var(--cd-number-size);
+    font-weight: 700;
+    color: var(--cd-separator-color);
+    line-height: 1;
+    animation: cdBlink 1s step-start infinite;
+}
+
+@keyframes cdBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+}
+
+/* ── Expired message ── */
+.cd-expired {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--cd-separator-color);
+    padding: 12px 0;
+    text-align: center;
+}
+
+/* ── Empty-state placeholder (admin / not configured) ── */
+.cd-countdown-placeholder {
+    padding: 12px 16px;
+    color: #888;
+    font-style: italic;
+    background: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    .cd-flip-card {
+        min-width: 56px;
+        padding: 14px 16px;
+    }
+
+    .cd-number {
+        font-size: calc(var(--cd-number-size) * 0.65);
+    }
+
+    .cd-separator span {
+        font-size: calc(var(--cd-number-size) * 0.65);
+    }
+}

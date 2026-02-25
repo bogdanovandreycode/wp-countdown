@@ -2,6 +2,8 @@
 
 namespace CountdownPlugin;
 
+use CountdownPlugin\Controllers\MetaBoxes\CountdownMetaBox;
+use CountdownPlugin\Controllers\PostTypes\CountdownPostController;
 use WpToolKit\Controller\ViewLoader;
 use WpToolKit\Loader\AttributeLoader;
 
@@ -54,6 +56,10 @@ class Boot
         );
 
         $loader->loadRoutes();
+
+        // Register custom post type & meta box
+        new CountdownPostController();
+        new CountdownMetaBox();
 
         new Main(
             $this->pluginFilePath,
