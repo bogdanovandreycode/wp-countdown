@@ -1,0 +1,22 @@
+{
+    "name": "arraydev/wp-countdown",
+    "description": "WordPress plugin wp-countdown",
+    "type": "wordpress-plugin",
+    "license": "GPL2",
+    "authors": [
+        {
+            "name": "Arraydev"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "arraydev/wptoolkit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CountdownPlugin\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
