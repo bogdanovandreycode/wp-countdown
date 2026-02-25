@@ -3,7 +3,7 @@
 Plugin Name: wp-countdown
 Plugin URI: https://github.com/bogdanovandreycode
 Description: Плагин обратного отсчёта с поддержкой WPBakery Page Builder. Создавайте красивые динамические таймеры обратного отсчёта с гибкими настройками отображаемых единиц времени.
-Version: 1.0
+Version: 1.0.1
 Author: Arraydev
 Author URI: https://github.com/bogdanovandreycode
 License: GPL2
