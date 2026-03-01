@@ -33,28 +33,74 @@
      * @returns {Object|null}
      */
     function calcDiff(targetMs, units) {
-        var diffSec = Math.floor((targetMs - Date.now()) / 1000);
-        if (diffSec <= 0) return null;
+        var now = new Date();
+        var target = new Date(targetMs);
+        
+        if (target <= now) return null;
 
         var result = {};
-        var remaining = diffSec;
-
-        var secondsIn = {
-            years: Math.floor(365.25 * 24 * 3600),
-            months: Math.floor(30.4375 * 24 * 3600),
-            weeks: 7 * 24 * 3600,
-            days: 24 * 3600,
-            hours: 3600,
-            minutes: 60,
-            seconds: 1,
-        };
+        var current = new Date(now);
 
         // Ensure units are processed from largest to smallest
         var orderedUnits = ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'];
+        
         orderedUnits.forEach(function (unit) {
-            if (units.indexOf(unit) !== -1 && secondsIn[unit] !== undefined) {
-                result[unit] = Math.floor(remaining / secondsIn[unit]);
-                remaining -= result[unit] * secondsIn[unit];
+            if (units.indexOf(unit) === -1) return;
+            
+            if (unit === 'years') {
+                var years = 0;
+                while (true) {
+                    var nextYear = new Date(current);
+                    nextYear.setFullYear(current.getFullYear() + 1);
+                    if (nextYear > target) break;
+                    years++;
+                    current = nextYear;
+                }
+                result.years = years;
+            } else if (unit === 'months') {
+                var months = 0;
+                while (true) {
+                    var nextMonth = new Date(current);
+                    nextMonth.setMonth(current.getMonth() + 1);
+                    if (nextMonth > target) break;
+                    months++;
+                    current = nextMonth;
+                }
+                result.months = months;
+            } else if (unit === 'weeks') {
+                var weeks = 0;
+                while (true) {
+                    var nextWeek = new Date(current);
+                    nextWeek.setDate(current.getDate() + 7);
+                    if (nextWeek > target) break;
+                    weeks++;
+                    current = nextWeek;
+                }
+                result.weeks = weeks;
+            } else if (unit === 'days') {
+                var days = 0;
+                while (true) {
+                    var nextDay = new Date(current);
+                    nextDay.setDate(current.getDate() + 1);
+                    if (nextDay > target) break;
+                    days++;
+                    current = nextDay;
+                }
+                result.days = days;
+            } else if (unit === 'hours') {
+                var diffMs = target - current;
+                var hours = Math.floor(diffMs / (1000 * 60 * 60));
+                result.hours = hours;
+                current = new Date(current.getTime() + hours * 60 * 60 * 1000);
+            } else if (unit === 'minutes') {
+                var diffMs = target - current;
+                var minutes = Math.floor(diffMs / (1000 * 60));
+                result.minutes = minutes;
+                current = new Date(current.getTime() + minutes * 60 * 1000);
+            } else if (unit === 'seconds') {
+                var diffMs = target - current;
+                var seconds = Math.floor(diffMs / 1000);
+                result.seconds = seconds;
             }
         });
 
