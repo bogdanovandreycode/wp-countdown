@@ -17,13 +17,13 @@ if (!defined('ABSPATH')) {
 }
 
 $unitLabels = [
-    'years'   => __('Лет',     'wp-countdown'),
+    'years'   => __('Лет', 'wp-countdown'),
     'months'  => __('Месяцев', 'wp-countdown'),
-    'weeks'   => __('Недель',  'wp-countdown'),
-    'days'    => __('Дней',    'wp-countdown'),
-    'hours'   => __('Часов',   'wp-countdown'),
-    'minutes' => __('Минут',   'wp-countdown'),
-    'seconds' => __('Секунд',  'wp-countdown'),
+    'weeks'   => __('Недель', 'wp-countdown'),
+    'days'    => __('Дней', 'wp-countdown'),
+    'hours'   => __('Часов', 'wp-countdown'),
+    'minutes' => __('Минут', 'wp-countdown'),
+    'seconds' => __('Секунд', 'wp-countdown'),
 ];
 
 /** @var string[] $activeUnits */
@@ -31,7 +31,7 @@ $activeUnits = array_keys(array_filter($units));
 $lastUnit    = !empty($activeUnits) ? end($activeUnits) : '';
 
 $elClass   = !empty($atts['el_class']) ? ' ' . esc_attr($atts['el_class']) : '';
-$idAttr    = !empty($atts['el_id'])    ? ' id="' . esc_attr($atts['el_id']) . '"' : '';
+$idAttr    = !empty($atts['el_id']) ? ' id="' . esc_attr($atts['el_id']) . '"' : '';
 $vcCss     = function_exists('vc_shortcode_custom_css_class') ? vc_shortcode_custom_css_class($atts['css'] ?? '', ' ') : '';
 ?>
 <div<?php echo $idAttr; ?>
@@ -74,7 +74,7 @@ $vcCss     = function_exists('vc_shortcode_custom_css_class') ? vc_shortcode_cus
     <div class="cd-expired"
          id="<?php echo esc_attr($uniqueId); ?>-expired"
          style="display:none;">
-        <?php esc_html_e('Время вышло!', 'wp-countdown'); ?>
+        <?php esc_html_e('Сейчас!', 'wp-countdown'); ?>
     </div>
 
 </div>
