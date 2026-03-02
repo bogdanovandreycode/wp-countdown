@@ -28,6 +28,12 @@
     gap: var(--cd-gap);
 }
 
+@media (max-width: 1024px) {
+    .cd-countdown {
+        justify-content: center;
+    }
+}
+
 /* ── Individual unit block ── */
 .cd-block {
     display: flex;
