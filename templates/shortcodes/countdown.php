@@ -16,15 +16,39 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Массив склонений для единиц времени: [1, 2-4, 5-0]
+// Например: 1 день, 2 дня, 5 дней
 $unitLabels = [
-    'years'   => __('Лет', 'wp-countdown'),
-    'months'  => __('Месяцев', 'wp-countdown'),
-    'weeks'   => __('Недель', 'wp-countdown'),
-    'days'    => __('Дней', 'wp-countdown'),
-    'hours'   => __('Часов', 'wp-countdown'),
-    'minutes' => __('Минут', 'wp-countdown'),
-    'seconds' => __('Секунд', 'wp-countdown'),
+    'years'   => [__('Год', 'wp-countdown'), __('Года', 'wp-countdown'), __('Лет', 'wp-countdown')],
+    'months'  => [__('Месяц', 'wp-countdown'), __('Месяца', 'wp-countdown'), __('Месяцев', 'wp-countdown')],
+    'weeks'   => [__('Неделя', 'wp-countdown'), __('Недели', 'wp-countdown'), __('Недель', 'wp-countdown')],
+    'days'    => [__('День', 'wp-countdown'), __('Дня', 'wp-countdown'), __('Дней', 'wp-countdown')],
+    'hours'   => [__('Час', 'wp-countdown'), __('Часа', 'wp-countdown'), __('Часов', 'wp-countdown')],
+    'minutes' => [__('Минута', 'wp-countdown'), __('Минуты', 'wp-countdown'), __('Минут', 'wp-countdown')],
+    'seconds' => [__('Секунда', 'wp-countdown'), __('Секунды', 'wp-countdown'), __('Секунд', 'wp-countdown')],
 ];
+
+/**
+ * Функция склонения русских числительных
+ * @param int $number Число
+ * @param array $forms Массив форм [1, 2-4, 5-0]
+ * @return string
+ */
+function pluralize($number, $forms) {
+    $number = abs($number) % 100;
+    $n1 = $number % 10;
+    
+    if ($number > 10 && $number < 20) {
+        return $forms[2];
+    }
+    if ($n1 > 1 && $n1 < 5) {
+        return $forms[1];
+    }
+    if ($n1 == 1) {
+        return $forms[0];
+    }
+    return $forms[2];
+}
 
 /** @var string[] $activeUnits */
 $activeUnits = array_keys(array_filter($units));
@@ -42,6 +66,7 @@ $vcCss     = function_exists('vc_shortcode_custom_css_class') ? vc_shortcode_cus
          class="cd-countdown"
          data-target="<?php echo esc_attr($targetDateUtc); ?>"
          data-units="<?php echo esc_attr(implode(',', $activeUnits)); ?>"
+         data-labels="<?php echo esc_attr(json_encode($unitLabels)); ?>"
          role="timer"
          aria-label="<?php esc_attr_e('Обратный отсчёт', 'wp-countdown'); ?>">
 
@@ -57,8 +82,8 @@ $vcCss     = function_exists('vc_shortcode_custom_css_class') ? vc_shortcode_cus
                     </div>
                 </div>
 
-                <div class="cd-label">
-                    <?php echo esc_html($unitLabels[$unit] ?? $unit); ?>
+                <div class="cd-label" data-label-key="<?php echo esc_attr($unit); ?>">
+                    <?php echo esc_html(isset($unitLabels[$unit]) ? $unitLabels[$unit][2] : $unit); ?>
                 </div>
 
             </div>

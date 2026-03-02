@@ -117,6 +117,28 @@
     }
 
     /**
+     * Склонение русских числительных
+     * @param {number} number - Число
+     * @param {Array} forms - Массив форм [1, 2-4, 5-0]
+     * @returns {string}
+     */
+    function pluralize(number, forms) {
+        number = Math.abs(number) % 100;
+        var n1 = number % 10;
+        
+        if (number > 10 && number < 20) {
+            return forms[2];
+        }
+        if (n1 > 1 && n1 < 5) {
+            return forms[1];
+        }
+        if (n1 === 1) {
+            return forms[0];
+        }
+        return forms[2];
+    }
+
+    /**
      * Обновляет значение одного элемента с flip-анимацией.
      * @param {HTMLElement} el   – элемент .cd-number
      * @param {number}      val  – новое значение
@@ -148,22 +170,28 @@
     function initCountdown(el) {
         var targetUtc = el.getAttribute('data-target');
         var unitsStr = el.getAttribute('data-units');
+        var labelsStr = el.getAttribute('data-labels');
 
         if (!targetUtc || !unitsStr) return;
 
         var units = unitsStr.split(',').map(function (u) { return u.trim(); }).filter(Boolean);
         var targetMs = parseUtcDate(targetUtc);
+        var labels = labelsStr ? JSON.parse(labelsStr) : {};
 
         if (!targetMs) {
             console.warn('[cd-countdown] Не удалось распарсить дату: ' + targetUtc);
             return;
         }
 
-        // Cache number elements
+        // Cache number and label elements
         var numberEls = {};
+        var labelEls = {};
         units.forEach(function (unit) {
             var numEl = el.querySelector('[data-key="' + unit + '"]');
             if (numEl) numberEls[unit] = numEl;
+            
+            var lblEl = el.querySelector('[data-label-key="' + unit + '"]');
+            if (lblEl) labelEls[unit] = lblEl;
         });
 
         var expiredEl = document.getElementById(el.id + '-expired');
@@ -183,11 +211,19 @@
                 var numEl = numberEls[unit];
                 if (!numEl) return;
 
+                var value = diff[unit];
+
                 if (initial) {
                     // Render without animation on first paint
-                    numEl.textContent = pad(diff[unit]);
+                    numEl.textContent = pad(value);
                 } else {
-                    flipNumber(numEl, diff[unit]);
+                    flipNumber(numEl, value);
+                }
+
+                // Update label with correct declension
+                var lblEl = labelEls[unit];
+                if (lblEl && labels[unit]) {
+                    lblEl.textContent = pluralize(value, labels[unit]);
                 }
             });
         }
