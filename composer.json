@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "arraydev/wptoolkit": "*"
+        "arraydev/wptoolkit": "v1.1.8-beta"
     },
     "autoload": {
         "psr-4": {

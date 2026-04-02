@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c827ff8e368aeb6b867aa2b7b1ea351",
+    "content-hash": "5f93cd054bf42f3815b6a006e94b8d44",
     "packages": [
         {
             "name": "arraydev/wptoolkit",
-            "version": "v1.0.7",
+            "version": "v1.1.8-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bogdanovandreycode/WPToolkit.git",
-                "reference": "0308a14487f415a1259dbb493b4490bb38bd8c82"
+                "reference": "5f1f4190328c8063ac0f983b25f94814bd1a1f1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bogdanovandreycode/WPToolkit/zipball/0308a14487f415a1259dbb493b4490bb38bd8c82",
-                "reference": "0308a14487f415a1259dbb493b4490bb38bd8c82",
+                "url": "https://api.github.com/repos/bogdanovandreycode/WPToolkit/zipball/5f1f4190328c8063ac0f983b25f94814bd1a1f1d",
+                "reference": "5f1f4190328c8063ac0f983b25f94814bd1a1f1d",
                 "shasum": ""
             },
             "require": {
@@ -43,9 +43,9 @@
             "description": "WP Tool Kit is library for create wordpress plugin.",
             "support": {
                 "issues": "https://github.com/bogdanovandreycode/WPToolkit/issues",
-                "source": "https://github.com/bogdanovandreycode/WPToolkit/tree/v1.1.5-beta"
+                "source": "https://github.com/bogdanovandreycode/WPToolkit/tree/v1.1.8-beta"
             },
-            "time": "2025-04-15T16:40:06+00:00"
+            "time": "2025-06-01T15:13:31+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -277,7 +277,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "arraydev/wptoolkit": 10
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
