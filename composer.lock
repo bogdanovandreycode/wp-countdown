@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fb1edc64b84b4436f624f0a75d6cefe",
+    "content-hash": "a241b61484bc18a5ba91fe3682994608",
     "packages": [
         {
             "name": "arraydev/wptoolkit",
-            "version": "v1.1.9-beta",
+            "version": "v1.1.10-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bogdanovandreycode/WPToolkit.git",
-                "reference": "063a630289afaff1dc05549a7e2a2bb7d2ad31ae"
+                "reference": "ee1bb2debcd551a3725fbd3ab9d855ff7c1e8dca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bogdanovandreycode/WPToolkit/zipball/063a630289afaff1dc05549a7e2a2bb7d2ad31ae",
-                "reference": "063a630289afaff1dc05549a7e2a2bb7d2ad31ae",
+                "url": "https://api.github.com/repos/bogdanovandreycode/WPToolkit/zipball/ee1bb2debcd551a3725fbd3ab9d855ff7c1e8dca",
+                "reference": "ee1bb2debcd551a3725fbd3ab9d855ff7c1e8dca",
                 "shasum": ""
             },
             "require": {
@@ -43,9 +43,9 @@
             "description": "WP Tool Kit is library for create wordpress plugin.",
             "support": {
                 "issues": "https://github.com/bogdanovandreycode/WPToolkit/issues",
-                "source": "https://github.com/bogdanovandreycode/WPToolkit/tree/v1.1.9-beta"
+                "source": "https://github.com/bogdanovandreycode/WPToolkit/tree/v1.1.10-beta"
             },
-            "time": "2026-04-02T13:49:06+00:00"
+            "time": "2026-04-02T14:18:50+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
